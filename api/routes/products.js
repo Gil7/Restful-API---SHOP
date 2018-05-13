@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const multer = require('multer')
-
+const checkAuth = require('../middleware/check-auth')
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './uploads/')
@@ -112,7 +112,7 @@ router.get('/:productId', (req, res, next) => {
     })
     
 })
-router.put('/:productId', (req, res, next) => {
+router.put('/:productId', checkAuth,(req, res, next) => {
     const productId = req.params.productId
     const updateOps = {}
     for (const key of Object.keys(req.body)) {
@@ -140,7 +140,7 @@ router.put('/:productId', (req, res, next) => {
     
 })
 
-router.delete('/:productId', (req, res, next) => {
+router.delete('/:productId', checkAuth,(req, res, next) => {
     const productId = req.params.productId
     Product.remove({_id : productId}).exec()
     .then(result => {

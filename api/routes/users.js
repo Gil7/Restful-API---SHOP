@@ -3,7 +3,8 @@ const router = express.Router()
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-router.get('/', (req, res, next) => {
+const checkAuth = require('../middleware/check-auth')
+router.get('/', checkAuth,(req, res, next) => {
     User.find()
     .select('email password _id')
     .exec()
@@ -114,7 +115,7 @@ router.post('/signup', (req, res, next) => {
     })
     
 })
-router.get('/:userId', (req, res, next) => {
+router.get('/:userId', checkAuth,(req, res, next) => {
     User.findById(req.params.userId)
     .select('email password _id')
     .exec()
@@ -136,7 +137,7 @@ router.get('/:userId', (req, res, next) => {
         })
     })
 })
-router.delete('/:userId', (req, res, next) => {
+router.delete('/:userId', checkAuth, (req, res, next) => {
     User.remove({_id : re.params.userId})
     .exec().
     then(result => {
