@@ -8,6 +8,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+app.use('/uploads', express.static('uploads'))
 
 const productsRouter = require('./api/routes/products')
 const ordersRouter = require('./api/routes/orders')
