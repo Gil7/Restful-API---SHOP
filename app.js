@@ -12,10 +12,8 @@ app.use('/uploads', express.static('uploads'))
 
 const productsRouter = require('./api/routes/products')
 const ordersRouter = require('./api/routes/orders')
-
+const usersRouter = require('./api/routes/users')
 mongoose.connect('mongodb://localhost/api-shop')
-
-
 
 app.use(morgan('dev'))
 
@@ -36,7 +34,7 @@ app.use((req, res, next) => {
 
 app.use('/products', productsRouter)
 app.use('/orders', ordersRouter)
-
+app.use('/users', usersRouter)
 
 app.use((req, res, next) => {
     const error = new Error('Not found')
