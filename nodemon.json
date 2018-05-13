@@ -1,5 +1,6 @@
 {
     "env" : {
-        "MONGO_ATLAS_PWD" : "api-shop"
+        "MONGO_ATLAS_PWD" : "api-shop",
+        "JWT_KEY": "superpasswordcreatedhereGMS2018"
     }
 }
